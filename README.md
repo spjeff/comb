@@ -1,7 +1,7 @@
 ## Description
 Gather eventlogs from servers into a daily summary email with attached CSV detail. Helps administrators be proactive with issue resolution by better understanding internal server health. Open with Microsoft Excel for PivotTable, PivotCharts, and further analysis..
 
-[![](https://raw.githubusercontent.com/spjeff/comb/master/doc/download.png)](https://github.com/spjeff/splaunch/releases/download/SPLaunch/SPLaunch.zip)
+[![](https://raw.githubusercontent.com/spjeff/comb/master/doc/download.png)](https://raw.githubusercontent.com/spjeff/comb/master/EventComb.ps1)
 
 ## Now includes SharePoint farm detail
 * Build number
