@@ -66,6 +66,7 @@ Function Installer() {
 Function BuildDescription($build) {
     switch ($build) {
         # Build numbers from http://toddklindt.com/sp2013builds
+		# 2013
         "15.0.4128.1014" {
             return "Beta"; break;
         }
@@ -105,6 +106,8 @@ Function BuildDescription($build) {
         "15.0.4569.1000" {
             return "Service Pack 1"; break;
         }
+		
+		# 2014
         "​​15.0.4605.1000" {
             return "April 2014 CU"; break;
         }
@@ -129,12 +132,109 @@ Function BuildDescription($build) {
         "15.0.4667.1000" {
             return "November 2014 CU"; break;
         }
-        "15.0.4667.1000" {
-            return "November 2014 CU"; break;
-        }
         "15.0.4675.1000" {
             return "December 2014 CU"; break;
         }
+		
+		# 2015
+        "15.0.4693.1001" {
+            return "​February 2015 CU"; break;
+        }
+		"​15.0.4701.1001" {
+            return "​March 2015 CU"; break;
+        }
+		"​15.0.4711.1000" {
+            return "​April 2015 CU"; break;
+        }
+		"​15.0.4719.1002" {
+            return "​May 2015 CU"; break;
+        }
+        "15.0.4727.1001" {
+            return "​June 2015 CU"; break;
+        }
+		"15.0.4737.1001" {
+            return "​July 2015 CU"; break;
+        }
+        "​​​15.0.4745.1001" {
+            return "August 2015 CU"; break;
+        }		
+        "​​​​15.0.4753.1000" {
+            return "​September 2015 CU"; break;
+        }	
+		"​​​​15.0.4763.1000" {
+            return "October 2015 CU"; break;
+        }	
+        "15.0.4771.1000" {
+            return "November 2015 CU"; break;
+        }		
+        "15.0.4779.1000" {
+            return "December 2015 CU"; break;
+        }	
+		
+		# 2016
+		"​15.0.4787.1000" {
+            return "​January 2016 CU"; break;
+        }	
+		"​15.0.4797.1000" {
+            return "​February 2016 CU"; break;
+        }
+		"​15.0.4805.1000" {
+            return "​March 2016 CU"; break;
+        }
+		"​​15.0.4815.1000" {
+            return "​April 2016 Cu"; break;
+        }
+		"​​15.0.4823.1003" {
+            return "May 2016 CU"; break;
+        }		
+		"​​​15.0.4833.1003" {
+            return "June 2016 CU"; break;
+        }	
+		"15.0.4841.1000" {
+            return "July 2016 CU"; break;
+        }			
+		"​​​15.0.4849.1000" {
+            return "​August 2016 CU"; break;
+        }	
+		"​15.0.4859.1000" {
+            return "​September 2016 CU"; break;
+        }	
+		"​15.0.4867.1002" {
+            return "​October 2016 CU"; break;
+        }	
+		"15.0.4875.1000" {
+            return "​November 2016 CU"; break;
+        }	
+		"​15.0.4885.1000" {
+            return "December 2016 CU"; break;
+        }	
+		
+		# 2017
+		"15.0.4893.1001" {
+            return "​January 2017 CU"; break;
+        }	
+		"​15.0.4911.1001" {
+            return "​March 2017 CU"; break;
+        }	
+		"​15.0.4911.1001" {
+            return "​March 2017 CU"; break;
+        }	
+		"​​15.0.4919.1003" {
+            return "​​April 2017 CU"; break;
+        }	
+		"​​15.0.4927.1001" {
+            return "​​May 2017 CU"; break;
+        }	
+		"​15.0.4937.1001​" {
+            return "​​June 2017 CU"; break;
+        }	
+		"​​15.0.4945.1000" {
+            return "​July 2017 CU"; break;
+        }	
+		"​​15.0.1953.1000" {
+            return "​August 2017 CU"; break;
+        }	
+
         default {
             return "Unknown"
         }
