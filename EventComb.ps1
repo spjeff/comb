@@ -3,8 +3,8 @@
 #==================================================================================================================
 #  Filename:        EventComb.ps1
 #  Author:          Jeff Jones
-#  Version:         1.31
-#  Last Modified:   01-29-2017
+#  Version:         1.32
+#  Last Modified:   11-01-2017
 #  Description:     Gather eventlogs from servers into a daily summary email with attached CSV detail.
 #                   Helps administrators be proactive with issue resolution by better understanding internal 
 #                   server health.  Open with Microsoft Excel for PivotTable, PivotCharts, and further analysis.
