@@ -26,18 +26,18 @@ $global:configHours = -24											# time threshold (previous day)
 $global:configMaxEvents = 4999										# maximum number of events from any 1 server
 $global:configIsSharePoint = $true									# include SharePoint farm detail
 $global:configTargetMachines = @("spautodetect")					# target servers. use = @("spautodetect") for SharePoint farm auto detection
-$global:configSendMailTo = @("admin1@demo.com","admin2@demo.com")	# to address
+$global:configSendMailTo = @("admin1@demo.com", "admin2@demo.com")	# to address
 $global:configSendMailFrom = "no-reply@domain.com"					# from address
 $global:configSendMailHost = "mailrelay"							# outbound SMTP mail server
 $global:configWarnDisk = 0.20										# threshold for warning (15%)
 $global:configErrorDisk = 0.10										# threshold for warning (10%)
-$global:configExcludeMaintenanceHours = @(21,22,23,0,1,2,3)			# exclude 11PM-7AM nightly maintenance window
-$global:configExcludeEventSources = @("Schannel~36888","Schannel~36874","McAfee PortalShield~2053") # exclude known event sources
+$global:configExcludeMaintenanceHours = @(21, 22, 23, 0, 1, 2, 3)			# exclude 11PM-7AM nightly maintenance window
+$global:configExcludeEventSources = @("Schannel~36888", "Schannel~36874", "McAfee PortalShield~2053") # exclude known event sources
 
 Function Installer() {
     # Add to Task Scheduler
     Write-Host "  Installing to Task Scheduler..." -ForegroundColor Green
-    $user = $ENV:USERDOMAIN+"\"+$ENV:USERNAME
+    $user = $ENV:USERDOMAIN + "\" + $ENV:USERNAME
     Write-Host "  Current User: $user"
 	
     # Attempt to detect password from IIS Pool (if current user is local admin & farm account)
@@ -66,7 +66,7 @@ Function Installer() {
 Function BuildDescription($build) {
     switch ($build) {
         # Build numbers from http://toddklindt.com/sp2013builds
-		# 2013
+        # 2013
         "15.0.4128.1014" {
             return "Beta"; break;
         }
@@ -107,7 +107,7 @@ Function BuildDescription($build) {
             return "Service Pack 1"; break;
         }
 		
-		# 2014
+        # 2014
         "​​15.0.4605.1000" {
             return "April 2014 CU"; break;
         }
@@ -136,23 +136,23 @@ Function BuildDescription($build) {
             return "December 2014 CU"; break;
         }
 		
-		# 2015
+        # 2015
         "15.0.4693.1001" {
             return "​February 2015 CU"; break;
         }
-		"​15.0.4701.1001" {
+        "​15.0.4701.1001" {
             return "​March 2015 CU"; break;
         }
-		"​15.0.4711.1000" {
+        "​15.0.4711.1000" {
             return "​April 2015 CU"; break;
         }
-		"​15.0.4719.1002" {
+        "​15.0.4719.1002" {
             return "​May 2015 CU"; break;
         }
         "15.0.4727.1001" {
             return "​June 2015 CU"; break;
         }
-		"15.0.4737.1001" {
+        "15.0.4737.1001" {
             return "​July 2015 CU"; break;
         }
         "​​​15.0.4745.1001" {
@@ -161,7 +161,7 @@ Function BuildDescription($build) {
         "​​​​15.0.4753.1000" {
             return "​September 2015 CU"; break;
         }	
-		"​​​​15.0.4763.1000" {
+        "​​​​15.0.4763.1000" {
             return "October 2015 CU"; break;
         }	
         "15.0.4771.1000" {
@@ -171,69 +171,133 @@ Function BuildDescription($build) {
             return "December 2015 CU"; break;
         }	
 		
-		# 2016
-		"​15.0.4787.1000" {
+        # 2016
+        "​15.0.4787.1000" {
             return "​January 2016 CU"; break;
         }	
-		"​15.0.4797.1000" {
+        "​15.0.4797.1000" {
             return "​February 2016 CU"; break;
         }
-		"​15.0.4805.1000" {
+        "​15.0.4805.1000" {
             return "​March 2016 CU"; break;
         }
-		"​​15.0.4815.1000" {
+        "​​15.0.4815.1000" {
             return "​April 2016 Cu"; break;
         }
-		"​​15.0.4823.1003" {
+        "​​15.0.4823.1003" {
             return "May 2016 CU"; break;
         }		
-		"​​​15.0.4833.1003" {
+        "​​​15.0.4833.1003" {
             return "June 2016 CU"; break;
         }	
-		"15.0.4841.1000" {
+        "15.0.4841.1000" {
             return "July 2016 CU"; break;
         }			
-		"​​​15.0.4849.1000" {
+        "​​​15.0.4849.1000" {
             return "​August 2016 CU"; break;
         }	
-		"​15.0.4859.1000" {
+        "​15.0.4859.1000" {
             return "​September 2016 CU"; break;
         }	
-		"​15.0.4867.1002" {
+        "​15.0.4867.1002" {
             return "​October 2016 CU"; break;
         }	
-		"15.0.4875.1000" {
+        "15.0.4875.1000" {
             return "​November 2016 CU"; break;
         }	
-		"​15.0.4885.1000" {
+        "​15.0.4885.1000" {
             return "December 2016 CU"; break;
         }	
 		
-		# 2017
-		"15.0.4893.1001" {
+        # 2017
+        "15.0.4893.1001" {
             return "​January 2017 CU"; break;
         }	
-		"​15.0.4911.1001" {
+        "​15.0.4911.1001" {
             return "​March 2017 CU"; break;
         }	
-		"​15.0.4911.1001" {
+        "​15.0.4911.1001" {
             return "​March 2017 CU"; break;
         }	
-		"​​15.0.4919.1003" {
+        "​​15.0.4919.1003" {
             return "​​April 2017 CU"; break;
         }	
-		"​​15.0.4927.1001" {
+        "​​15.0.4927.1001" {
             return "​​May 2017 CU"; break;
         }	
-		"​15.0.4937.1001​" {
+        "​15.0.4937.1001​" {
             return "​​June 2017 CU"; break;
         }	
-		"​​15.0.4945.1000" {
+        "​​15.0.4945.1000" {
             return "​July 2017 CU"; break;
         }	
-		"​​15.0.1953.1000" {
+        "​​15.0.4953.1000" {
             return "​August 2017 CU"; break;
-        }	
+        }
+        "​​15.0.4963.1000" {
+            return "September 2017 CU"; break;
+        }
+        "​​15.0.4971.1000" {
+            return "October 2017 CU"; break;
+        }
+
+        # SP 2016
+        "16.0.4107.1002"
+        {return "SharePoint 2016 IT Preview"; break; }
+        "16.0.4306.1002"
+        {return "SharePoint 2016 Beta 2"; break; }
+        "16.0.4327.1000"
+        {return "SharePoint 2016 Release Candidate"; break; }
+        "16.0.4336.1000"
+        {return "SharePoint 2016 Release Candidate"; break; }
+        "16.0.4351.1000"
+        {return "SharePoint 2016 RTM"; break; }
+        "16.0.4366.1000"
+        {return "April 2016 Patch"; break; }
+        "16.0.4378.1000"
+        {return "May 2016 Patch"; break; }
+        "16.0.4393.1000"
+        {return "June 2016 Patch"; break; }
+        "16.0.4405.1000"
+        {return "July 2016 Patch"; break; }
+        "16.0.4417.1000"
+        {return "August 2016 Patch"; break; }
+        "16.0.4432.1000"
+        {return "September 2016 Patch"; break; }
+        "16.0.4444.1004"
+        {return "October 2016 Patch"; break; }
+        "16.0.4456.1004"
+        {return "November 2016 Patch - Feature Pack 1"; break; }
+        "16.0.4456.1000"
+        {return "November 2016 Patch - Feature Pack 1"; break; }
+        "16.0.4471.1000"
+        {return "December 2016 Patch"; break; }
+        "16.0.4483.1001"
+        {return "January 2017 Patch"; break; }
+        "16.0.4498.1002"
+        {return "February 2017 Patch"; break; }
+        "16.0.4510.1001"
+        {return "March 2017 Patch"; break; }
+        "16.0.4522.1000"
+        {return "April 2017 Patch"; break; }
+        "16.0.4534.1000"
+        {return "May 2017 Patch"; break; }
+        "16.0.4549.1000"
+        {return "June 2017 Patch"; break; }
+        "16.0.4561.1000"
+        {return "July 2017 Patch"; break; }
+        "16.0.4573.1002"
+        {return "August 2017 Patch"; break; }
+        "16.0.4573.1000"
+        {return "August 2017 Patch"; break; }
+        "16.0.4588.1001"
+        {return "September 2017 Patch"; break; }
+        "16.0.4588.1000"
+        {return "September 2017 Patch"; break; }
+        "16.0.4600.1002"
+        {return "October 2017 Patch"; break; }
+        "16.0.4600.1000"
+        {return "October 2017 Patch"; break; }
 
         default {
             return "Unknown"
@@ -264,14 +328,14 @@ Function EventComb() {
         foreach ($log in @("Application", "System")) {
             Write-Host ("Gathering log {0} for {1} ... " -f $log, $machine) -NoNewline
             # Gather event log detail
-            foreach ($type in @("Error","Warning")) {
+            foreach ($type in @("Error", "Warning")) {
                 $events = Get-EventLog -ComputerName $machine -Logname $log -After $logAfter -EntryType $type -Newest $global:configMaxEvents
                 if ($events) {
                     foreach ($e in $events) {
                         $keep = $true
                         # Exclude based on ID and Source
                         foreach ($skip in $global:configExcludeEventSources) {
-                            if ($e.Source -eq  $skip.Split("~")[0] -and $e.EventID -eq $skip.Split("~")[1]) {
+                            if ($e.Source -eq $skip.Split("~")[0] -and $e.EventID -eq $skip.Split("~")[1]) {
                                 $keep = $false
                             }
                         }
@@ -287,7 +351,7 @@ Function EventComb() {
                         }
                     }
                 }
-			 }
+            }
             Write-Host "[OK]" -ForegroundColor Green
         }
     }
@@ -320,7 +384,7 @@ Function EventComb() {
             $countWarn = $logWarn.Count
             $totalWarn += $countWarn
         }
-        $coll += @($machine,$countErr,$countWarn)
+        $coll += @($machine, $countErr, $countWarn)
         $html += ("<tr><td>{0}</td><td>&nbsp;</td><td style='background-color: #FF9D9D;'>{1}</td><td style='color: #FFFFFF'>-</td><td style='background-color: #FFFF6C;'>{2}</td></tr>" -f $machine, $countErr, $countWarn)
     }
     $html += ("<tr><td>&nbsp;</td><td width='20px'>&nbsp;</td><td>{0}</td><td style='color: #FFFFFF'>-</td><td>{1}</td></tr>" -f $totalErr, $totalWarn)
@@ -347,7 +411,7 @@ Function EventComb() {
     Write-Host "[OK]" -ForegroundColor Green
 
     # Free disk space
-    $coll=@()
+    $coll = @()
     $html += "<br><br><table><tr><td colspan=3><b>Free Disk</b></td></tr>"
     foreach ($machine in $global:configTargetMachines) {
         $html += "<tr><td valign='top'>$machine</td></tr>"
@@ -367,7 +431,7 @@ Function EventComb() {
                 $note = "*"
             }
             $html += ("<tr><td></td><td>$letter</td><td style='background-color: $color;'>&nbsp;{0:N1} GB ({1:P0}) $note&nbsp;</td></tr>" -f $freeSpace, $prctFree)
-            $coll += @($machine,$letter,($w.Size/1GB),$freeSpace,$prctFree)
+            $coll += @($machine, $letter, ($w.Size / 1GB), $freeSpace, $prctFree)
         }
     }
     $xml | Add-Member -MemberType NoteProperty -Name "machineFreeDisk" -Value $coll
@@ -376,11 +440,11 @@ Function EventComb() {
     if ($global:configIsSharePoint) {
         # SharePoint farm build
         Write-Host "SharePoint farm ... " -NoNewline
-        $f=Get-SPFarm;$p=Get-SPProduct;$p.PatchableUnitDisplayNames |% {$n=$_;$v=($p.GetPatchableUnitInfoByDisplayName($n).patches | sort version -desc)[0].version;if (!$maxv) {
-                $maxv=$v
-            };if ($v -gt $maxv) {
-                $max=$v
-            }};$obj=New-Object -TypeName PSObject -Prop (@{'FarmName'=$f.Name;'FarmBuild'=$f.BuildVersion;'Product'=$max;});
+        $f = Get-SPFarm; $p = Get-SPProduct; $p.PatchableUnitDisplayNames | % {$n = $_; $v = ($p.GetPatchableUnitInfoByDisplayName($n).patches | sort version -desc)[0].version; if (!$maxv) {
+                $maxv = $v
+            }; if ($v -gt $maxv) {
+                $max = $v
+            }}; $obj = New-Object -TypeName PSObject -Prop (@{'FarmName' = $f.Name; 'FarmBuild' = $f.BuildVersion; 'Product' = $max; });
 		
         #Display
         $max = $obj.FarmBuild
@@ -395,129 +459,130 @@ Function EventComb() {
         $xml | Add-Member -MemberType NoteProperty -Name "FarmProduct" -Value $obj.Product
         $xml | Add-Member -MemberType NoteProperty -Name "FarmBuildDescription" -Value $(BuildDescription($max))
 		
-    # Health Rules
-    $coll=@(); $wa=Get-SPWebApplication -IncludeCentralAdministration |? {$_.IsAdministrationWebApplication -eq $true}; $ca=get-spweb $wa.Url; $c=0; $ca.Lists["Review problems and solutions"].Items |% {if ($_["Severity"] -ne "4 - Success") {
-            $coll += $_
-        }}; 
+        # Health Rules
+        $coll = @(); $wa = Get-SPWebApplication -IncludeCentralAdministration |? {$_.IsAdministrationWebApplication -eq $true}; $ca = get-spweb $wa.Url; $c = 0; $ca.Lists["Review problems and solutions"].Items | % {if ($_["Severity"] -ne "4 - Success") {
+                $coll += $_
+            }}; 
 		
-    #Display
-    $html += "<p><b>Health Rules ({0})</b></p><ul>" -f $coll.Count
-    $coll |% {$html += "<li>$($_.Title)</li>"}
-    $html += "</ul>"
-    #REM $xml | Add-Member -MemberType NoteProperty -Name "HealthRules" -Value $coll
+        #Display
+        $html += "<p><b>Health Rules ({0})</b></p><ul>" -f $coll.Count
+        $coll | % {$html += "<li>$($_.Title)</li>"}
+        $html += "</ul>"
+        #REM $xml | Add-Member -MemberType NoteProperty -Name "HealthRules" -Value $coll
 		
-    # User Profile Services - "Started"
-    $upsfarm = Get-SPServiceInstance |? {($_.TypeName -eq "User Profile Synchronization Service" -or $_.TypeName -eq "User Profile Service") -and $_.Status -eq "Online"} | Select TypeName, @{n="Server";e={$_.Server.Address}}, Status
+        # User Profile Services - "Started"
+        $upsfarm = Get-SPServiceInstance |? {($_.TypeName -eq "User Profile Synchronization Service" -or $_.TypeName -eq "User Profile Service") -and $_.Status -eq "Online"} | Select TypeName, @{n = "Server"; e = {$_.Server.Address}}, Status
 		
-    if ($upsfarm) {
-        # UPS Count
-        $wa = (Get-SPWebApplication)[0]
-        $site = Get-SPSite $wa.Url
-        $context = Get-SPServiceContext $site
-        $profileManager = New-Object Microsoft.Office.Server.UserProfiles.UserProfileManager($context)
-        $upscount = $profileManager.Count
+        if ($upsfarm) {
+            # UPS Count
+            $wa = (Get-SPWebApplication)[0]
+            $site = Get-SPSite $wa.Url
+            $context = Get-SPServiceContext $site
+            $profileManager = New-Object Microsoft.Office.Server.UserProfiles.UserProfileManager($context)
+            $upscount = $profileManager.Count
 			
-        # Display
-        $html += "<p><b>User Profile</b></p><table>"
-        $html += "<tr><td>Service</td><td>Machine</td><td>Status</td><td>Profile Count</td></tr>"
-        $upsfarm |% {$color="yellow";if ($_.Status -eq "Online") {
-                $color="lightgreen"
-            };$html += ("<tr><td>{0}</td><td>{1}</td><td style='background-color:$color'>{2}</td><td>{3:n0}</td></tr>" -f $_.TypeName, $_.Server, $_.Status, $upscount)}
+            # Display
+            $html += "<p><b>User Profile</b></p><table>"
+            $html += "<tr><td>Service</td><td>Machine</td><td>Status</td><td>Profile Count</td></tr>"
+            $upsfarm | % {$color = "yellow"; if ($_.Status -eq "Online") {
+                    $color = "lightgreen"
+                }; $html += ("<tr><td>{0}</td><td>{1}</td><td style='background-color:$color'>{2}</td><td>{3:n0}</td></tr>" -f $_.TypeName, $_.Server, $_.Status, $upscount)}
+            $html += "</table>"
+            $xml | Add-Member -MemberType NoteProperty -Name "UserProfileService" -Value $upsfarm
+        }
+        else {
+            # Not found
+            $html += "<p><b>User Profile</b></p><table>"
+            $html += "<tr><td style='background-color:yellow'>Not Found</td></tr></table>"
+        }
+
+        # Distributed Cache - UP/DOWN and # MB and # items for all nodes
+        Use-CacheCluster
+        $dcstat = Get-AFCacheHostStatus | % {$ServerName = $_.HostName; $status = (Get-CacheHost |? {$_.HostName -eq $ServerName}).Status; Get-AFCacheStatistics -ComputerName $_.HostName -CachePort $_.PortNo | Add-Member -MemberType NoteProperty -Name 'ServerName' -Value $ServerName -PassThru | Add-Member -MemberType NoteProperty -Name 'Status' -Value $status -PassThru} | Sort Server
+		
+        #Display
+        $html += "<p><b>Distributed Cache</b></p><table>"
+        $html += "<tr><td>Machine</td><td>Status</td><td>Size</td><td>ItemCount</td><td>RegionCount</td><td>NamedCacheCount</td><td>RequestCount</td><td>MissCount</td></tr>"
+        $dcstat | % {$color = "lightgreen"; if ($_.Status.ToString().ToUpper() -ne "UP") {
+                $color = "red"
+            }; $html += ("<tr><td>{0}</td><td style='background-color:$color'>[{1}]</td><td>{2}</td><td>{3}</td><td>{4}</td><td>{5}</td><td>{6}</td><td>{7}</td></tr>" -f $_.ServerName, $_.Status.ToString().ToUpper(), $_.Size, $_.ItemCount, $_.RegionCount, $_.NamedCacheCount, $_.RequestCount, $_.MissCount)}
         $html += "</table>"
-        $xml | Add-Member -MemberType NoteProperty -Name "UserProfileService" -Value $upsfarm
-    } else {
-        # Not found
-        $html += "<p><b>User Profile</b></p><table>"
-        $html += "<tr><td style='background-color:yellow'>Not Found</td></tr></table>"
+        $xml | Add-Member -MemberType NoteProperty -Name "DistributedCache" -Value $dcstat
+		
+        # Account expiration and lockout
+        $coll = Get-SPManagedAccount | % {$login = ($_.UserName.Split('\')[1]); $u = Get-ADUser $login -Properties *; $_} | Select UserName, @{n = 'AccountExpirationDate'; e = {$u.AccountExpirationDate}}, @{n = 'LockedOut'; e = {$u.LockedOut}}, @{n = 'PasswordExpired'; e = {$u.PasswordExpired}}, @{n = 'PasswordNeverExpires'; e = {$u.PasswordNeverExpires}}, @{n = 'PasswordLastSet'; e = {$u.PasswordLastSet}}, @{n = 'LastBadPasswordAttempt'; e = {$u.LastBadPasswordAttempt}}, @{n = 'LastLogonDate'; e = {$u.LastLogonDate}} | Sort UserName
+		
+        # Display
+        $html += "<p><b>AD Service Accounts ({0})</b></p><table>" -f $coll.Count
+        $html += "<tr><td>UserName</td><td>LockedOut</td><td>PasswordExpired</td><td>AccountExpirationDate</td><td>PasswordNeverExpires</td><td>PasswordLastSet</td><td>LastBadPasswordAttempt</td><td>LastLogonDate</td></tr>"
+        $coll | % {$colorlock = ''; $colorexp = ''; if ($_.LockedOut.ToString() -eq 'True') {
+                $colorlock = 'yellow'
+            }; if ($_.PasswordExpired.ToString() -eq 'True') {
+                $colorexp = 'yellow'
+            }; $html += ("<tr><td>{0}</td><td style='background-color:$colorlock'>{1}</td><td style='background-color:$colorexp'>{2}</td><td>{3}</td><td>{4}</td></tr>" -f $_.UserName, $_.LockedOut, $_.PasswordExpired, $_.AccountExpirationDate, $_.PasswordNeverExpires, $_.PasswordLastSet, $_.LastBadPasswordAttempt, $_.LastLogonDate)}
+        $html += "</table>"
+        $xml | Add-Member -MemberType NoteProperty -Name "ActiveDirectory" -Value $coll
+		
+        # Search Topology
+        $ssa = Get-SPEnterpriseSearchServiceApplication
+        $t = Get-SPEnterpriseSearchTopology -SearchApplication $ssa -Active
+        $c = Get-SPEnterpriseSearchComponent -SearchTopology $t
+        $coll = $c | Select ServerName, Name | Sort Name
+        $html += "<p><b>Search Topology ({0})</b></p><table>" -f $coll.Count
+        $html += "<tr><td>Machine</td><td>Role</td></tr>"
+        $coll | % {$html += "<tr><td>{0}</td><td>{1}</td></tr>" -f $_.ServerName, $_.Name.Replace("Component", "")}
+        $html += "</table>"
+        $xml | Add-Member -MemberType NoteProperty -Name "SearchTopology" -Value $coll
+
+        $sta = Get-SPEnterpriseSearchStatus -SearchApplication $ssa
+        $coll = $sta | Select Name, State | Sort Name
+        $html += "<p><b>Search Components ({0})</b></p><table>" -f $coll.Count
+        $html += "<tr><td>Component</td><td>State</td></tr>"
+        $coll | % {$color = ''; if ($_.State -ne 'Active') {
+                $color = 'yellow';
+            }; $html += "<tr><td>{0}</td><td style='background-color:$color'>{1}</td></tr>" -f $_.Name.Replace("Component", ""), $_.State}
+        $html += "</table>"
+        $xml | Add-Member -MemberType NoteProperty -Name "SearchStatus" -Value $coll
+		
+        # WSP custom solution
+        $coll = @()
+        $wsp = Get-SPSolution
+        $html += "<p><b>WSP Solutions ({0})</b></p><table>" -f $wsp.Count
+        $html += "<tr><td>Name</td><td>DeploymentState</td><td>LastOperationEndTime</td><td>DeployedWebApplications</td></tr>";
+        $wsp | Sort LastOperationEndTime -Descending | % {$w = $_; $name = $w.Name; $ds = $w.DeploymentState; $lo = $w.LastOperationEndTime; $color = ""; if (!$_.DeploymentState.ToString().Contains("Deployed")) {
+                $color = "yellow"
+            }; $waurls = ""; $_.DeployedWebApplications | % {$waurls += ($_.Url + ", "); }; $coll += (New-Object -TypeName PSObject -Prop (@{"Name" = $name; "DeploymentState" = $ds; "LastOperationEndTime" = $lo; "WAUrls" = $waurls})); $html += ("<tr><td>{0}</td><td style='background-color:$color'>{1}</td><td>{2}</td><td>{3}</td></tr>" -f $_.Name, $_.DeploymentState, $_.LastOperationEndTime, $waurls)};
+        $html += "</table>"
+        $xml | Add-Member -MemberType NoteProperty -Name "WSPSolution" -Value $coll
+		
+        # User Content
+        $sites = Get-SPSite -Limit All
+        $gb = [Math]::Round((($sites.Usage.Storage | Measure-Object -Sum).Sum / 1GB), 2)
+        $sc = $sites.Count
+        $dc = (Get-SPContentDatabase).Count
+        $html += "<p><b>User Content</p><table>" -f $wsp.Count
+        $html += "<tr><td>Sites</td><td>$sc</td></tr>"
+        $html += "<tr><td>GB</td><td>$gb</td></tr>"
+        $html += "<tr><td>Databases</td><td>$dc</td></tr>"
+        $html += "</table>"
+        $xml | Add-Member -MemberType NoteProperty -Name "ContentSites" -Value $sc
+        $xml | Add-Member -MemberType NoteProperty -Name "ContentGB" -Value $gb
+        $xml | Add-Member -MemberType NoteProperty -Name "ContentDB" -Value $dn
+		
+        # complete
+        Write-Host "[OK]" -ForegroundColor Green
     }
-
-    # Distributed Cache - UP/DOWN and # MB and # items for all nodes
-    Use-CacheCluster
-    $dcstat = Get-AFCacheHostStatus | % {$ServerName = $_.HostName; $status = (Get-CacheHost |? {$_.HostName -eq $ServerName}).Status; Get-AFCacheStatistics -ComputerName $_.HostName -CachePort $_.PortNo | Add-Member -MemberType NoteProperty -Name 'ServerName' -Value $ServerName -PassThru | Add-Member -MemberType NoteProperty -Name 'Status' -Value $status -PassThru} | Sort Server
-		
-    #Display
-    $html += "<p><b>Distributed Cache</b></p><table>"
-    $html += "<tr><td>Machine</td><td>Status</td><td>Size</td><td>ItemCount</td><td>RegionCount</td><td>NamedCacheCount</td><td>RequestCount</td><td>MissCount</td></tr>"
-    $dcstat |% {$color="lightgreen";if ($_.Status.ToString().ToUpper() -ne "UP"){
-            $color="red"
-        };$html += ("<tr><td>{0}</td><td style='background-color:$color'>[{1}]</td><td>{2}</td><td>{3}</td><td>{4}</td><td>{5}</td><td>{6}</td><td>{7}</td></tr>" -f $_.ServerName,$_.Status.ToString().ToUpper(),$_.Size,$_.ItemCount,$_.RegionCount,$_.NamedCacheCount,$_.RequestCount,$_.MissCount)}
-    $html += "</table>"
-    $xml | Add-Member -MemberType NoteProperty -Name "DistributedCache" -Value $dcstat
-		
-    # Account expiration and lockout
-    $coll = Get-SPManagedAccount |% {$login=($_.UserName.Split('\')[1]); $u=Get-ADUser $login -Properties *; $_} | Select UserName, @{n='AccountExpirationDate';e={$u.AccountExpirationDate}},@{n='LockedOut';e={$u.LockedOut}},@{n='PasswordExpired';e={$u.PasswordExpired}},@{n='PasswordNeverExpires';e={$u.PasswordNeverExpires}},@{n='PasswordLastSet';e={$u.PasswordLastSet}},@{n='LastBadPasswordAttempt';e={$u.LastBadPasswordAttempt}},@{n='LastLogonDate';e={$u.LastLogonDate}} | Sort UserName
-		
-    # Display
-    $html += "<p><b>AD Service Accounts ({0})</b></p><table>" -f $coll.Count
-    $html += "<tr><td>UserName</td><td>LockedOut</td><td>PasswordExpired</td><td>AccountExpirationDate</td><td>PasswordNeverExpires</td><td>PasswordLastSet</td><td>LastBadPasswordAttempt</td><td>LastLogonDate</td></tr>"
-    $coll |% {$colorlock='';$colorexp='';if ($_.LockedOut.ToString() -eq 'True'){
-            $colorlock='yellow'
-        };if($_.PasswordExpired.ToString() -eq 'True'){
-            $colorexp='yellow'
-        };$html += ("<tr><td>{0}</td><td style='background-color:$colorlock'>{1}</td><td style='background-color:$colorexp'>{2}</td><td>{3}</td><td>{4}</td></tr>" -f $_.UserName, $_.LockedOut, $_.PasswordExpired, $_.AccountExpirationDate, $_.PasswordNeverExpires, $_.PasswordLastSet, $_.LastBadPasswordAttempt, $_.LastLogonDate)}
-    $html += "</table>"
-    $xml | Add-Member -MemberType NoteProperty -Name "ActiveDirectory" -Value $coll
-		
-    # Search Topology
-    $ssa = Get-SPEnterpriseSearchServiceApplication
-    $t=Get-SPEnterpriseSearchTopology -SearchApplication $ssa -Active
-    $c=Get-SPEnterpriseSearchComponent -SearchTopology $t
-    $coll = $c | Select ServerName,Name | Sort Name
-    $html += "<p><b>Search Topology ({0})</b></p><table>" -f $coll.Count
-    $html += "<tr><td>Machine</td><td>Role</td></tr>"
-    $coll |% {$html += "<tr><td>{0}</td><td>{1}</td></tr>" -f $_.ServerName, $_.Name.Replace("Component","")}
-    $html += "</table>"
-    $xml | Add-Member -MemberType NoteProperty -Name "SearchTopology" -Value $coll
-
-    $sta = Get-SPEnterpriseSearchStatus -SearchApplication $ssa
-    $coll = $sta | Select Name,State | Sort Name
-    $html += "<p><b>Search Components ({0})</b></p><table>" -f $coll.Count
-    $html += "<tr><td>Component</td><td>State</td></tr>"
-    $coll |% {$color=''; if($_.State -ne 'Active'){
-            $color='yellow';
-        };$html += "<tr><td>{0}</td><td style='background-color:$color'>{1}</td></tr>" -f $_.Name.Replace("Component",""), $_.State}
-    $html += "</table>"
-    $xml | Add-Member -MemberType NoteProperty -Name "SearchStatus" -Value $coll
-		
-    # WSP custom solution
-    $coll = @()
-    $wsp = Get-SPSolution
-    $html += "<p><b>WSP Solutions ({0})</b></p><table>" -f $wsp.Count
-    $html += "<tr><td>Name</td><td>DeploymentState</td><td>LastOperationEndTime</td><td>DeployedWebApplications</td></tr>";
-    $wsp | Sort LastOperationEndTime -Descending |% {$w=$_;$name=$w.Name;$ds=$w.DeploymentState;$lo=$w.LastOperationEndTime;$color="";if (!$_.DeploymentState.ToString().Contains("Deployed")){
-            $color="yellow"
-        };$waurls="";$_.DeployedWebApplications |% {$waurls += ($_.Url+", ");};$coll += (New-Object -TypeName PSObject -Prop (@{"Name"=$name;"DeploymentState"=$ds;"LastOperationEndTime"=$lo;"WAUrls"=$waurls}));$html += ("<tr><td>{0}</td><td style='background-color:$color'>{1}</td><td>{2}</td><td>{3}</td></tr>" -f $_.Name,$_.DeploymentState,$_.LastOperationEndTime,$waurls)};
-    $html += "</table>"
-    $xml | Add-Member -MemberType NoteProperty -Name "WSPSolution" -Value $coll
-		
-    # User Content
-    $sites = Get-SPSite -Limit All
-    $gb = [Math]::Round((($sites.Usage.Storage | Measure-Object -Sum).Sum/1GB),2)
-    $sc = $sites.Count
-    $dc = (Get-SPContentDatabase).Count
-    $html += "<p><b>User Content</p><table>" -f $wsp.Count
-    $html += "<tr><td>Sites</td><td>$sc</td></tr>"
-    $html += "<tr><td>GB</td><td>$gb</td></tr>"
-    $html += "<tr><td>Databases</td><td>$dc</td></tr>"
-    $html += "</table>"
-    $xml | Add-Member -MemberType NoteProperty -Name "ContentSites" -Value $sc
-    $xml | Add-Member -MemberType NoteProperty -Name "ContentGB" -Value $gb
-    $xml | Add-Member -MemberType NoteProperty -Name "ContentDB" -Value $dn
-		
-    # complete
-    Write-Host "[OK]" -ForegroundColor Green
-}
 	
-# Send email summary with CSV attachment
-$html += "<p>=== FROM " + $env:computername + " ===</p>"
-$xml | Export-Clixml "EventComb-$farm.xml"
-Copy-Item "EventComb-$farm.csv" "EventComb-$farm.txt" -Force
-$total = ($totalErr  + $totalWarn)
-Send-MailMessage -To $global:configSendMailTo -From $global:configSendMailFrom -Subject "$farm EventComb - $total" -BodyAsHtml -Body $html -Attachments @("EventComb-$farm.csv","EventComb-$farm.txt","EventComb-$farm.xml") -SmtpServer $global:configSendMailHost
-Write-Host ("Operation completed successfully in {0} seconds" -f ((Get-Date) - $start).Seconds)
-Remove-Item "EventComb-$farm.csv"
-Remove-Item "EventComb-$farm.txt"
-Remove-Item "EventComb-$farm.xml"
+    # Send email summary with CSV attachment
+    $html += "<p>=== FROM " + $env:computername + " ===</p>"
+    $xml | Export-Clixml "EventComb-$farm.xml"
+    Copy-Item "EventComb-$farm.csv" "EventComb-$farm.txt" -Force
+    $total = ($totalErr + $totalWarn)
+    Send-MailMessage -To $global:configSendMailTo -From $global:configSendMailFrom -Subject "$farm EventComb - $total" -BodyAsHtml -Body $html -Attachments @("EventComb-$farm.csv", "EventComb-$farm.txt", "EventComb-$farm.xml") -SmtpServer $global:configSendMailHost
+    Write-Host ("Operation completed successfully in {0} seconds" -f ((Get-Date) - $start).Seconds)
+    Remove-Item "EventComb-$farm.csv"
+    Remove-Item "EventComb-$farm.txt"
+    Remove-Item "EventComb-$farm.xml"
 }
 
 #Main
@@ -525,10 +590,11 @@ Write-Host "EventComb v1.2  (last updated 11-20-2014)`n"
 
 #Check Permission Level
 If (-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole(`
-	[Security.Principal.WindowsBuiltInRole] "Administrator")) {
+            [Security.Principal.WindowsBuiltInRole] "Administrator")) {
     Write-Warning "You do not have Administrator rights to run this script!`nPlease re-run this script as an Administrator!"
     Break
-} else {
+}
+else {
     #EventComb
     $global:path = $MyInvocation.MyCommand.Path
     $tasks = schtasks /query /fo csv | ConvertFrom-Csv
