@@ -3,7 +3,7 @@
 #==================================================================================================================
 #  Filename:        EventComb.ps1
 #  Author:          Jeff Jones
-#  Version:         1.32
+#  Version:         1.33
 #  Last Modified:   11-01-2017
 #  Description:     Gather eventlogs from servers into a daily summary email with attached CSV detail.
 #                   Helps administrators be proactive with issue resolution by better understanding internal 
@@ -481,7 +481,7 @@ Function EventComb() {
             $max = $obj.Product
         }
 
-        # If different -- Alert
+        # Farm Build Number different -- Alert
         if (($max -ne $mostRecentProduct) -or ($obj.FarmBuild -ne $mostRecentBuild)) {
             $body = "<h2>Patch Change</h2><hr/>"
             $body += "Farm build number was <b>$mostRecentBuild</b>, and is now <b>$($obj.FarmBuild)</b><br/>"
