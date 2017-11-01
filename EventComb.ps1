@@ -208,7 +208,7 @@ Function BuildDescription($build) {
         }	
         "​15.0.4885.1000" {
             return "December 2016 CU"; break;
-        }	
+        }
 		
         # 2017
         "15.0.4893.1001" {
@@ -442,17 +442,60 @@ Function EventComb() {
     if ($isSharePoint) {
         # SharePoint farm build
         Write-Host "SharePoint farm ... " -NoNewline
-        $f = Get-SPFarm; $p = Get-SPProduct; $p.PatchableUnitDisplayNames | % {$n = $_; $v = ($p.GetPatchableUnitInfoByDisplayName($n).patches | sort version -desc)[0].version; if (!$maxv) {
+        $f = Get-SPFarm
+        $p = Get-SPProduct
+        $p.PatchableUnitDisplayNames | % {
+            $n = $_; $v = ($p.GetPatchableUnitInfoByDisplayName($n).patches | sort version -desc)[0].version;
+            if (!$maxv) {
                 $maxv = $v
-            }; if ($v -gt $maxv) {
+            }
+            if ($v -gt $maxv) {
                 $max = $v
-            }}; $obj = New-Object -TypeName PSObject -Prop (@{'FarmName' = $f.Name; 'FarmBuild' = $f.BuildVersion; 'Product' = $max; });
-		
-        #Display
+            }
+        };
+        $obj = New-Object -TypeName PSObject -Prop (@{'FarmName' = $f.Name; 'FarmBuild' = $f.BuildVersion; 'Product' = $max; });
+
+        # Build History in Central Admin web
+        # Ensure List exists
+        $wa = (Get-SPWebApplication -IncludeCentralAdministration) |? {$_.IsAdministrationWebApplication -eq $true}
+        $web = Get-SPWeb $wa.Url
+        $list = $web.Lists |? {$_.Title -eq "BuildHistory"}
+        if (!$list) {
+            $id = $web.Lists.Add("BuildHistory", "", 100)
+            $list = $web.Lists.GetList($id.Guid, $false)
+            $list.Fields.Add("Product", 2, $false)
+        }
+
+        # Most recent row
+        $mostRecentBuild = ""
+        $mostRecentProduct = ""
+        $rows = $list.Items | Sort Id -Descending
+        if ($rows) {
+            $mostRecentBuild = $rows[0].Title
+            $mostRecentProduct = $rows[0].Product
+        }
+
+        # Max Product
         $max = $obj.FarmBuild
         if ($obj.Product -gt $obj.FarmBuild) {
             $max = $obj.Product
         }
+
+        # If different -- Alert
+        if (($max -ne $mostRecentProduct) -or ($obj.FarmBuild -ne $mostRecentBuild)) {
+            $body = "<h2>Patch Change</h2><hr/>"
+            $body += "Farm build number was <b>$mostRecentBuild</b>, and is now <b>$($obj.FarmBuild)</b><br/>"
+            $body += "Max Product number was <b>$mostRecentProduct</b>, and is now <b>$max</b>"
+            Send-MailMessage -To $global:configSendMailTo -From $global:configSendMailFrom -Subject "$farm Patch Change - $total" -BodyAsHtml -Body $body -SmtpServer $global:configSendMailHost -Priority High
+        }
+
+        # Add row
+        $item = $list.Items.Add()
+        $item["Title"] = $mostRecentBuild
+        $item["Product"] = $mostRecentProduct
+        $item.Update()
+       
+        # Email table
         $html += "<p><b>Farm Patch Level</b></p><table>"
         $html += "<tr>Build</td><td>$($obj.FarmBuild)</tr>"
         $html += "<tr>Product</td><td>$($obj.Product)</tr>"
