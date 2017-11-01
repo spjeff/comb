@@ -21,11 +21,12 @@ param (
     [switch]$install
 )
 
+# Plugin
+Add-PSSnapin Microsoft.SharePoint.PowerShell -ErrorAction SilentlyContinue | Out-Null
+
 # Configuration
 $global:configHours = -24											# time threshold (previous day)
 $global:configMaxEvents = 4999										# maximum number of events from any 1 server
-$global:configIsSharePoint = $true									# include SharePoint farm detail
-$global:configTargetMachines = @("spautodetect")					# target servers. use = @("spautodetect") for SharePoint farm auto detection
 $global:configSendMailTo = @("admin1@demo.com", "admin2@demo.com")	# to address
 $global:configSendMailFrom = "no-reply@domain.com"					# from address
 $global:configSendMailHost = "mailrelay"							# outbound SMTP mail server
@@ -307,8 +308,8 @@ Function BuildDescription($build) {
 
 Function EventComb() {
     # Auto detect on SharePoint farms
-    if ($global:configTargetMachines -eq @("spautodetect")) {
-        Add-PSSnapin Microsoft.SharePoint.PowerShell -ErrorAction SilentlyContinue
+    $isSharePoint = Get-Command Get-SPFarm -ErrorAction SilentlyContinue
+    if ($isSharePoint) {
         $global:configTargetMachines = @()
         foreach ($s in ((Get-SPFarm).Servers |? {$_.Role -ne "Invalid"} )) {
             $global:configTargetMachines += $s.Address
@@ -436,8 +437,9 @@ Function EventComb() {
     }
     $xml | Add-Member -MemberType NoteProperty -Name "machineFreeDisk" -Value $coll
     $html += "</table>"
-	
-    if ($global:configIsSharePoint) {
+    
+    $isSharePoint = Get-Command Get-SPFarm -ErrorAction SilentlyContinue
+    if ($isSharePoint) {
         # SharePoint farm build
         Write-Host "SharePoint farm ... " -NoNewline
         $f = Get-SPFarm; $p = Get-SPProduct; $p.PatchableUnitDisplayNames | % {$n = $_; $v = ($p.GetPatchableUnitInfoByDisplayName($n).patches | sort version -desc)[0].version; if (!$maxv) {
