@@ -471,8 +471,8 @@ Function EventComb() {
         $mostRecentProduct = ""
         $rows = $list.Items | Sort Id -Descending
         if ($rows) {
-            $mostRecentBuild = $rows[0].Title
-            $mostRecentProduct = $rows[0].Product
+            $mostRecentBuild = $rows[0]["Title"]
+            $mostRecentProduct = $rows[0]["Product"]
         }
 
         # Max Product
