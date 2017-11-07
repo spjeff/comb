@@ -3,8 +3,8 @@
 #==================================================================================================================
 #  Filename:        EventComb.ps1
 #  Author:          Jeff Jones
-#  Version:         1.33
-#  Last Modified:   11-01-2017
+#  Version:         1.34
+#  Last Modified:   11-07-2017
 #  Description:     Gather eventlogs from servers into a daily summary email with attached CSV detail.
 #                   Helps administrators be proactive with issue resolution by better understanding internal 
 #                   server health.  Open with Microsoft Excel for PivotTable, PivotCharts, and further analysis.
@@ -34,6 +34,7 @@ $global:configWarnDisk = 0.20										# threshold for warning (15%)
 $global:configErrorDisk = 0.10										# threshold for warning (10%)
 $global:configExcludeMaintenanceHours = @(21, 22, 23, 0, 1, 2, 3)			# exclude 11PM-7AM nightly maintenance window
 $global:configExcludeEventSources = @("Schannel~36888", "Schannel~36874", "McAfee PortalShield~2053") # exclude known event sources
+$global:configTargetMachines = @("server1","server2")
 
 Function Installer() {
     # Add to Task Scheduler
